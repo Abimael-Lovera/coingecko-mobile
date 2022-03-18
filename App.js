@@ -1,4 +1,12 @@
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import {
+	View,
+	Text,
+	FlatList,
+	StyleSheet,
+	TextInput,
+	StatusBar,
+} from 'react-native';
+
 import { useEffect, useState } from 'react';
 import CoinItem from './components/CoinItem';
 
@@ -21,13 +29,19 @@ const App = () => {
 
 	return (
 		<View style={styles.container}>
-			<Text>App</Text>
+			<StatusBar backgroundColor='#434C5E' />
+			<View>
+				<Text style={styles.title}>Coingecko Crypto</Text>
+				<TextInput />
+			</View>
 			<FlatList
+				style={styles.list}
 				data={coins}
 				renderItem={({ item }) => {
 					console.log(item.name);
 					return <CoinItem coin={item} />;
 				}}
+				showsVerticalScrollIndicator={false}
 			/>
 		</View>
 	);
@@ -38,6 +52,14 @@ const styles = StyleSheet.create({
 		backgroundColor: '#3B4252',
 		alignItems: 'center',
 		flex: 1,
+	},
+	title: {
+		color: '#FFFFFF',
+		marginTop: 16,
+		fontSize: 20,
+	},
+	list: {
+		width: '90%',
 	},
 });
 
