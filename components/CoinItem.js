@@ -11,17 +11,31 @@ const CoinItem = ({ coin }) => {
 					<Text style={styles.textSymbol}>{coin.symbol}</Text>
 				</View>
 			</View>
-			<Text style={styles.text}>10000</Text>
+			<View>
+				<Text style={styles.textPrice}>R$ {coin.current_price}</Text>
+				<Text
+					style={[
+						styles.pricePercentage,
+						coin.price_change_percentage_24h > 0
+							? styles.priceUp
+							: styles.priceDown,
+					]}
+				>
+					{coin.price_change_percentage_24h.toString().substring(0, 4)} %
+				</Text>
+			</View>
 		</View>
 	);
 };
 const styles = StyleSheet.create({
 	containerItem: {
 		backgroundColor: '#4C566A',
-		padding: 16,
-		margin: 16,
+		padding: 14,
+		margin: 14,
+		marginBottom: 7,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
+		borderRadius: 5,
 	},
 	containerNames: {
 		marginLeft: 10,
@@ -30,15 +44,31 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 	},
 	text: {
-		color: '#A3BE8C',
+		color: '#ECEFF4',
+		fontWeight: 'bold',
+		fontSize: 16,
 	},
 	image: {
-		width: 30,
-		height: 30,
+		width: 32,
+		height: 32,
 	},
 	textSymbol: {
-		color: '#B48EAD',
+		color: '#EBCB8B',
 		textTransform: 'uppercase',
+	},
+	textPrice: {
+		color: '#D8DEE9',
+		textAlign: 'right',
+	},
+	pricePercentage: {
+		color: '#D8DEE9',
+		textAlign: 'right',
+	},
+	priceUp: {
+		color: '#A3BE8C',
+	},
+	priceDown: {
+		color: '#BF616A',
 	},
 });
 export default CoinItem;

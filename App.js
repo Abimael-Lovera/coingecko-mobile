@@ -12,13 +12,14 @@ import CoinItem from './components/CoinItem';
 
 const App = () => {
 	const [coins, setCoins] = useState([]);
+	const [search, setSearch] = useState('');
+	const [refreshing, setRefreshing] = useState(false);
 
 	const loadData = async () => {
 		const res = await fetch(
 			'https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=100&page=1&sparkline=false'
 		);
 		const data = await res.json();
-		console.log(data);
 		setCoins(data);
 	};
 
@@ -32,16 +33,30 @@ const App = () => {
 			<StatusBar backgroundColor='#434C5E' />
 			<View style={styles.header}>
 				<Text style={styles.title}>Coingecko Crypto</Text>
-				<TextInput style={styles.searchInput} />
+				<TextInput
+					style={styles.searchInput}
+					onChangeText={text => setSearch(text)}
+					placeholder='Search Coin'
+					placeholderTextColor='#858585'
+				/>
 			</View>
 			<FlatList
 				style={styles.list}
-				data={coins}
+				data={coins.filter(
+					coin =>
+						coin.name.toLowerCase().includes(search.toLowerCase()) ||
+						coin.symbol.toLowerCase().includes(search.toLowerCase())
+				)}
 				renderItem={({ item }) => {
-					console.log(item.name);
 					return <CoinItem coin={item} />;
 				}}
 				showsVerticalScrollIndicator={false}
+				refreshing={refreshing}
+				onRefresh={async () => {
+					setRefreshing(true);
+					await loadData();
+					setRefreshing(false);
+				}}
 			/>
 		</View>
 	);
@@ -57,22 +72,24 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		width: '90%',
-		margin: 10,
+		marginTop: 16,
+		marginBottom: 16,
 	},
 	title: {
 		color: '#FFFFFF',
-		marginTop: 16,
-		fontSize: 20,
+
+		fontSize: 24,
+		fontWeight: 'bold',
 	},
 	searchInput: {
-		color: '#FFFFFF',
-		borderBottomColor: '#FFFFFF',
+		color: '#E5E9F0',
+		borderBottomColor: '#E5E9F0',
 		borderBottomWidth: 2,
 		width: '40%',
 		textAlign: 'center',
 	},
 	list: {
-		width: '90%',
+		width: '95%',
 	},
 });
 
