@@ -6,7 +6,10 @@ const CoinItem = ({ coin }) => {
 		<View style={styles.containerItem}>
 			<View style={styles.coinName}>
 				<Image style={styles.image} source={{ uri: coin.image }} />
-				<Text style={styles.text}>{coin.name}</Text>
+				<View style={styles.containerNames}>
+					<Text style={styles.text}>{coin.name}</Text>
+					<Text style={styles.textSymbol}>{coin.symbol}</Text>
+				</View>
 			</View>
 			<Text style={styles.text}>10000</Text>
 		</View>
@@ -20,15 +23,22 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 	},
+	containerNames: {
+		marginLeft: 10,
+	},
 	coinName: {
 		flexDirection: 'row',
 	},
 	text: {
-		color: '#ECEFF4',
+		color: '#A3BE8C',
 	},
 	image: {
 		width: 30,
 		height: 30,
+	},
+	textSymbol: {
+		color: '#B48EAD',
+		textTransform: 'uppercase',
 	},
 });
 export default CoinItem;

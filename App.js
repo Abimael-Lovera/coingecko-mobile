@@ -30,9 +30,9 @@ const App = () => {
 	return (
 		<View style={styles.container}>
 			<StatusBar backgroundColor='#434C5E' />
-			<View>
+			<View style={styles.header}>
 				<Text style={styles.title}>Coingecko Crypto</Text>
-				<TextInput />
+				<TextInput style={styles.searchInput} />
 			</View>
 			<FlatList
 				style={styles.list}
@@ -53,10 +53,23 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		flex: 1,
 	},
+	header: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		width: '90%',
+		margin: 10,
+	},
 	title: {
 		color: '#FFFFFF',
 		marginTop: 16,
 		fontSize: 20,
+	},
+	searchInput: {
+		color: '#FFFFFF',
+		borderBottomColor: '#FFFFFF',
+		borderBottomWidth: 2,
+		width: '40%',
+		textAlign: 'center',
 	},
 	list: {
 		width: '90%',
