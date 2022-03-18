@@ -41,6 +41,7 @@ const App = () => {
 					console.log(item.name);
 					return <CoinItem coin={item} />;
 				}}
+				showsVerticalScrollIndicator={false}
 			/>
 		</View>
 	);
