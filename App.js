@@ -30,8 +30,12 @@ const App = () => {
 	return (
 		<View style={styles.container}>
 			<StatusBar backgroundColor='#434C5E' />
-
+			<View>
+				<Text style={styles.title}>Coingecko Crypto</Text>
+				<TextInput />
+			</View>
 			<FlatList
+				style={styles.list}
 				data={coins}
 				renderItem={({ item }) => {
 					console.log(item.name);
@@ -47,6 +51,14 @@ const styles = StyleSheet.create({
 		backgroundColor: '#3B4252',
 		alignItems: 'center',
 		flex: 1,
+	},
+	title: {
+		color: '#FFFFFF',
+		marginTop: 16,
+		fontSize: 20,
+	},
+	list: {
+		width: '90%',
 	},
 });
 
